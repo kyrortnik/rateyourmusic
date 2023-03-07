@@ -1,21 +1,9 @@
-pluginManagement {
-    repositories {
-        maven { url 'https://repo.spring.io/milestone' }
-        maven { url 'https://repo.spring.io/snapshot' }
-        gradlePluginPortal()
-    }
-}
 rootProject.name = 'rateyourmusic'
 
+include 'infrastructure:config-service'
 include 'infrastructure:gateway-service'
 include 'infrastructure:discovery-service'
-include 'infrastructure:config-service'
 
-//include 'applications:authentication-service'
-//include 'applications:user-service'
-//include 'applications:domain-service'
-//include 'applications:file-service'
-//include 'applications:notification-service'
+include 'applications:user-service'
 
-include 'dependencies:common'
 include 'dependencies:database'
