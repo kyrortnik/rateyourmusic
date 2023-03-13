@@ -1,0 +1,32 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.11.xsd">
+    <changeSet id="006.01_add_super_admin_to_user_table" author="Mikhail Piatrenka">
+        <insert tableName="users">
+            <column name="id" valueComputed="${u_id}"/>
+            <column name="email" value="admin@mail.com"/>
+            <column name="username" value="super_admin"/>
+            <column name="password" value="$2a$10$aqxu3h/ZKgTQkQkqz8hAOem8P2H3CVDy38PnipFnUsRr1KYb1uWIy"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="006.02_add_super_admin_to_user_profile_table" author="Mikhail Piatrenka">
+        <insert tableName="user_profile">
+            <column name="id" valueComputed="${u_id}"/>
+            <column name="user_id" valueComputed="(select id from users where username = 'super_admin')"/>
+            <column name="first_name" value="admin"/>
+            <column name="second_name" value="admin"/>
+            <column name="profile_type" value="SUPER_ADMIN"/>
+            <column name="status" value="ACTIVE"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="006.03_add_super_admin_function" author="Mikhail Piatrenka">
+        <insert tableName="user_profiles_functions">
+            <column name="user_profile_id"
+                    valueComputed="(select id from user_profile where profile_type = 'SUPER_ADMIN')"/>
+            <column name="function_id" valueComputed="(select id from functions where name = 'SUPER_ADMIN')"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
