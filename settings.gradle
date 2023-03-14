@@ -4,6 +4,8 @@ include 'infrastructure:config-service'
 include 'infrastructure:gateway-service'
 include 'infrastructure:discovery-service'
 
-include 'applications:user-service'
+//include 'applications:user-service'
+//include 'applications:domain-service'
+include 'applications:authentication-service'
 
 include 'dependencies:database'
