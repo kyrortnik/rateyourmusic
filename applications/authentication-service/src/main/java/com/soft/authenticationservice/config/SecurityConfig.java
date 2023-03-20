@@ -26,8 +26,8 @@ class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/artist*")
-                .hasRole("USER")
+//                .antMatchers("/artist/*")
+//                .hasRole("USER")
                 .anyRequest()
                 .permitAll();
         http.oauth2Login()
