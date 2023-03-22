@@ -1,43 +1,23 @@
 version: '2'
+
 services:
+
   config-service:
     container_name: config-service
-    build: infrastructure/config-service.config-service.Dockerfile
-#      context: infrastructure/config-service/
-#      dockerfile: config-service.Dockerfile
-    image: config-service:latest
+    build: ./infrastructure/config-service
     ports:
-#      - "18800-18888:8071"
       - "8071:8071"
-    expose:
-      - 8071
     networks:
       - spring-cloud-network
+
   discovery-service:
     container_name: discovery-service
-    build:
-      context: infrastructure/discovery-service/
-      dockerfile: discovery-service.Dockerfile
-    image: discovery-service:latest
+    build: ./infrastructure/discovery-service
     ports:
       - "8761:8761"
-    expose:
-      - 8761
     networks:
       - spring-cloud-network
-  gateway-service:
-    container_name: gateway-service
-    build:
-      context: infrastructure/gateway-service/
-      dockerfile: gateway-service.Dockerfile
-    image: gateway-service:latest
-    ports:
-#      - "18800-18888:8765"
-      - "8765:8765"
-    expose:
-      - 8765
-    networks:
-      - spring-cloud-network
+
 networks:
   spring-cloud-network:
-#    driver: bridge
+    driver: bridge
