@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.7.1'
-    id "io.spring.dependency-management" version '1.0.8.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'com.palantir.docker' version '0.33.0'
 }
 
 subprojects {
@@ -8,9 +9,9 @@ subprojects {
     group 'com.soft'
     version '1.0.0-SNAPSHOT'
 
-    apply plugin: 'java'
-    apply plugin: 'io.spring.dependency-management'
     apply plugin: 'java-library'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'com.palantir.docker'
 
     repositories {
         mavenCentral()

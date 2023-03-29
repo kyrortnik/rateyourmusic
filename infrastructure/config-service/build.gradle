@@ -5,3 +5,10 @@ plugins {
 dependencies {
     implementation 'org.springframework.cloud:spring-cloud-config-server'
 }
+
+docker {
+    name 'rateyourmusic-config-service'
+    dockerfile file('docker/Dockerfile')
+    copySpec.from(bootJar).rename('.*','config-service.jar')
+    buildArgs(['JAR_FILE': 'config-service.jar'])
+}

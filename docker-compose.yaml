@@ -4,7 +4,8 @@ services:
 
   config-service:
     container_name: config-service
-    build: ./infrastructure/config-service
+    build:
+      dockerfile: infrastructure/config-service/docker/Dockerfile
     ports:
       - "8071:8071"
     networks:
