@@ -2,10 +2,16 @@ version: '2'
 
 services:
 
+#  db:
+#    container_name: db_mssql
+#
+#  keycloak:
+#    container_name: security
+
   config-service:
     container_name: config-service
     build:
-      dockerfile: infrastructure/config-service/docker/Dockerfile
+      dockerfile: docker/config-service/Dockerfile
     ports:
       - "8071:8071"
     networks:
@@ -13,11 +19,14 @@ services:
 
   discovery-service:
     container_name: discovery-service
-    build: ./infrastructure/discovery-service
+    build:
+      dockerfile: docker/discovery-service/Dockerfile
     ports:
       - "8761:8761"
     networks:
       - spring-cloud-network
+    depends_on:
+      - config-service
 
 networks:
   spring-cloud-network:
