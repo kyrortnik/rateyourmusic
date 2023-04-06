@@ -1,12 +1,40 @@
-version: '2'
+version: '3'
 
 services:
 
-#  db:
-#    container_name: db_mssql
-#
-#  keycloak:
-#    container_name: security
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - rate-your-music-network
+
+  keycloak:
+    container_name: keycloak
+    image: jboss/keycloak:latest
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      DB_VENDOR: POSTGRES
+      DB_ADDR: postgres
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: password
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    restart: always
+    networks:
+      - rate-your-music-network
 
   config-service:
     container_name: config-service
@@ -15,7 +43,7 @@ services:
     ports:
       - "8071:8071"
     networks:
-      - spring-cloud-network
+      - rate-your-music-network
 
   discovery-service:
     container_name: discovery-service
@@ -24,10 +52,13 @@ services:
     ports:
       - "8761:8761"
     networks:
-      - spring-cloud-network
+      - rate-your-music-network
     depends_on:
       - config-service
 
 networks:
-  spring-cloud-network:
+  rate-your-music-network:
     driver: bridge
+
+volumes:
+  postgres_data:
