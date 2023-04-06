@@ -56,6 +56,17 @@ services:
     depends_on:
       - config-service
 
+  gateway-service:
+    container_name: gateway-service
+    build:
+      dockerfile: docker/gateway-service/Dockerfile
+    ports:
+      - "8765:8765"
+    networks:
+      - rate-your-music-network
+    depends_on:
+      - config-service
+
 networks:
   rate-your-music-network:
     driver: bridge
