@@ -1,4 +1,4 @@
-package com.soft.database.entity;
+package com.soft.domainservice.entity;
 
 import lombok.Getter;
 import lombok.Setter;

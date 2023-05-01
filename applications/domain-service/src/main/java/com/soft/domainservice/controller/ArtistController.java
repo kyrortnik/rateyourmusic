@@ -3,7 +3,10 @@ package com.soft.domainservice.controller;
 import com.soft.domainservice.entity.Artist;
 import com.soft.domainservice.service.ArtistService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
@@ -13,11 +16,10 @@ import java.security.Principal;
 public class ArtistController {
     private final ArtistService artistService;
 
-//    @CrossOrigin(origins = "http://localhost:8089")
     @GetMapping("/{id}")
     public Artist getById(@PathVariable String id, Principal principal) {
         System.out.println(principal.getName());
-        return artistService.findById(id);
 
+        return artistService.findById(id);
     }
 }

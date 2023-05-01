@@ -5,7 +5,3 @@ include 'infrastructure:gateway-service'
 include 'infrastructure:discovery-service'
 
 include 'applications:domain-service'
-include 'applications:user-service'
-include 'applications:authentication-service'
-
-include 'dependencies:database'

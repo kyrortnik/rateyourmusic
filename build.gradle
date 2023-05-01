@@ -29,8 +29,7 @@ subprojects {
         dependencies {
             dependency 'org.projectlombok:lombok:1.18.24'
             dependency 'org.liquibase:liquibase-core:4.17.2'
-            dependency 'com.microsoft.sqlserver:mssql-jdbc:7.2.2.jre11'
-
+            dependency 'org.postgresql:postgresql:42.6.0'
         }
     }
 

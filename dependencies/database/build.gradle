@@ -1,4 +1,0 @@
-dependencies {
-    api 'org.springframework.boot:spring-boot-starter-data-jpa'
-    api 'com.microsoft.sqlserver:mssql-jdbc'
-}

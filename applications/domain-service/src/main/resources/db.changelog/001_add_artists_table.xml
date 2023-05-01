@@ -2,26 +2,25 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.11.xsd">
-    <changeSet id="002.01_create_users_table" author="Mikhail Piatrenka">
-        <createTable tableName="users">
+    <changeSet id="001.01_create_artists_table" author="Mikhail Piatrenka">
+        <createTable tableName="artists">
             <column name="id" type="varchar(36)">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="email" type="varchar(254)">
-                <constraints unique="true" nullable="false"/>
-            </column>
-            <column name="username" type="varchar(30)">
-                <constraints unique="true" nullable="false"/>
-            </column>
-            <column name="password" type="varchar(100)">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+            <column name="type" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="updated_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+            <column name="created_at" type="timestamp" defaultValueComputed="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp" defaultValueComputed="now()">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>
+
+

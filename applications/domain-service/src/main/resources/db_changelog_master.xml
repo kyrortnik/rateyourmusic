@@ -4,9 +4,5 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.11.xsd">
-    <property name="u_id" value="NEWID()"
-              dbms="mssql"/>
-    <property name="u_id" value="(SELECT uuid())" dbms="h2"/>
-    <includeAll path="db_changelog"/>
-
+    <includeAll path="db.changelog"/>
 </databaseChangeLog>

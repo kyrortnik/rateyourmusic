@@ -1,8 +1,16 @@
 spring:
   application:
     name: domain-service
+  cloud:
+    config:
+      enabled: true
+      uri: http://config-server:8071
   config:
-    import: optional:configserver:http://localhost:8071/
+    import: optional:configserver:http://config-service:8071
+
+logging:
+  level:
+    web: debug
 
 server:
-  port: 8065
+  port: 8011

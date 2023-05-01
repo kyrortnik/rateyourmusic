@@ -33,3 +33,6 @@ Plan for now:
 - Rating
 - Song
 4. Integration tests
+
+- issues:
+   - HTTP 401 on acessing keycloak APIs
