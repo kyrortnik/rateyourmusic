@@ -1,16 +1,15 @@
 plugins {
     id 'org.springframework.boot' version '2.7.1'
-    id "io.spring.dependency-management" version '1.0.8.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 }
 
 subprojects {
 
     group 'com.soft'
-    version '1.0.0-SNAPSHOT'
+    version '0.0.1-SNAPSHOT'
 
-    apply plugin: 'java'
-    apply plugin: 'io.spring.dependency-management'
     apply plugin: 'java-library'
+    apply plugin: 'io.spring.dependency-management'
 
     repositories {
         mavenCentral()
@@ -30,8 +29,7 @@ subprojects {
         dependencies {
             dependency 'org.projectlombok:lombok:1.18.24'
             dependency 'org.liquibase:liquibase-core:4.17.2'
-            dependency 'com.microsoft.sqlserver:mssql-jdbc:7.2.2.jre11'
-
+            dependency 'org.postgresql:postgresql:42.6.0'
         }
     }
 

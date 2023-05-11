@@ -1,0 +1,100 @@
+version: '3'
+
+services:
+
+  domain-service:
+    container_name: domain-service
+    build:
+      dockerfile: docker/domain-service/Dockerfile
+    ports:
+      - "8011:8011"
+    networks:
+      - backend
+
+  gateway-service:
+    container_name: gateway-service
+    build:
+      dockerfile: docker/gateway-service/Dockerfile
+    ports:
+      - "8765:8765"
+    networks:
+      - backend
+    depends_on:
+      - discovery-service
+
+  discovery-service:
+    container_name: discovery-service
+    build:
+      dockerfile: docker/discovery-service/Dockerfile
+    ports:
+      - "8761:8761"
+    networks:
+      - backend
+    depends_on:
+      - config-service
+
+  config-service:
+    container_name: config-service
+    build:
+      dockerfile: docker/config-service/Dockerfile
+    ports:
+      - "8071:8071"
+    networks:
+      - backend
+
+  keycloak:
+    container_name: keycloak
+    image: jboss/keycloak:latest
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin_password
+      DB_VENDOR: POSTGRES
+      DB_ADDR: keycloak_db
+      DB_DATABASE: keycloak_db
+      DB_USER: k_admin
+      DB_PASSWORD: password
+    ports:
+      - "8080:8080"
+    depends_on:
+      - keycloak_db
+    restart: always
+    networks:
+      - backend
+
+  domain_service_db:
+    container_name: domain_service_db
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=ds_admin
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=domain_service_db
+    volumes:
+      - domain_service_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+
+  keycloak_db:
+    container_name: keycloak_db
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=k_admin
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=keycloak_db
+    volumes:
+      - keycloak_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  keycloak_data:
+  domain_service_data:
