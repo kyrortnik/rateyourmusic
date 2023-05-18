@@ -35,4 +35,4 @@ Plan for now:
 4. Integration tests
 
 - issues:
-   - HTTP 401 on acessing keycloak APIs
+   - docker gradle bootJat --no-daemon takes too long - around 1 min

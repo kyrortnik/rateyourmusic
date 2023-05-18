@@ -8,9 +8,5 @@ spring:
   config:
     import: optional:configserver:http://config-service:8071
 
-logging:
-  level:
-    web: debug
-
 server:
   port: 8011
